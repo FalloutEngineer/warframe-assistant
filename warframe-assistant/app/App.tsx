@@ -3,15 +3,22 @@ import RightBody from "./RightBody"
 
 import styles from "./app.module.css"
 
-export default function App({
+import { nextauthOptions } from "@/lib/nextauthoptions"
+import { getServerSession } from "next-auth/next"
+
+export default async function App({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
+  const session = await getServerSession(nextauthOptions)
+
+  return session ? (
     <div className={styles.app}>
       <LeftBody />
       <RightBody>{children}</RightBody>
     </div>
+  ) : (
+    <div className={styles.app}>{children}</div>
   )
 }

@@ -1,0 +1,118 @@
+.auth {
+}
+.authWrapper {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  min-height: 400px;
+
+  min-width: 360px;
+}
+.authText {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+}
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+}
+.authLabel {
+  color: black;
+  width: fit-content;
+
+  margin-bottom: 3px;
+}
+
+.authLabel:not(:first-child) {
+  margin-top: 12px;
+}
+.authSubmit {
+  color: black;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(210, 210, 210);
+  background-color: rgb(255, 251, 232);
+  border-radius: 7px;
+
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  transition: all 0.3s ease;
+
+  margin-top: 25px;
+}
+
+.authSubmit:hover {
+  background-color: rgb(255, 248, 215);
+}
+
+.authInput {
+  width: 100%;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(210, 210, 210);
+  border-radius: 7px;
+
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  color: black;
+}
+
+.labelRequired {
+  position: relative;
+}
+
+.labelRequired::after {
+  content: "*";
+  display: block;
+  position: absolute;
+  right: -10px;
+  top: -4px;
+  color: red;
+}
+
+.authRegister {
+  margin-top: 25px;
+  align-self: flex-start;
+}
+
+.rulesLabel {
+  color: black;
+
+  margin-top: 15px;
+
+  display: flex;
+  align-items: center;
+}
+
+.rulesLabel p {
+  cursor: pointer;
+}
+
+.registerCheckbox {
+  margin-right: 10px;
+}

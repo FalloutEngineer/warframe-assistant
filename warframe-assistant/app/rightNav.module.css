@@ -1,0 +1,35 @@
+.rightNav {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: white;
+
+  padding: 15px;
+  padding-bottom: 0px;
+}
+
+.rightNavList {
+  display: flex;
+  flex-direction: row;
+}
+.rightNavItem {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+}
+.rightNavLink {
+  padding: 7px 15px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-bottom-width: 0px;
+
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+
+  transition: all 0.1s ease;
+}
+
+.rightNavLink:hover,
+.active {
+  background-color: rgba(255, 255, 255, 0.119);
+}

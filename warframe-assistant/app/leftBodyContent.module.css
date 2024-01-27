@@ -1,0 +1,32 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  overflow-y: auto;
+
+  gap: 15px;
+}
+
+/* width */
+.body::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.body::-webkit-scrollbar-track {
+  background: #888;
+}
+
+/* Handle */
+.body::-webkit-scrollbar-thumb {
+  transition: all 0.3s ease;
+  background: #dfdfdf;
+}
+
+/* Handle on hover */
+.body::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 255, 255);
+
+  cursor: pointer;
+}

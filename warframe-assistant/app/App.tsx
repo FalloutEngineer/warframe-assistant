@@ -6,6 +6,8 @@ import styles from "./app.module.css"
 import { nextauthOptions } from "@/lib/nextauthoptions"
 import { getServerSession } from "next-auth/next"
 
+import { SessionProvider } from "next-auth/react"
+
 export default async function App({
   children,
 }: Readonly<{

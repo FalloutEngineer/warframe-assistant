@@ -4,8 +4,12 @@ import logo from "../public/logo.png"
 
 import styles from "./header.module.css"
 import Link from "next/link"
+import SignOutButton from "./SignOutButton"
+import { getServerSession } from "next-auth"
+import { nextauthOptions } from "@/lib/nextauthoptions"
 
-export default function Header() {
+export default async function Header() {
+  const session = await getServerSession(nextauthOptions)
   return (
     <header className={styles.header}>
       <div className={styles.logoWrapper}>
@@ -15,6 +19,10 @@ export default function Header() {
           className={styles.globalLogo}
         />
         <p className={styles.logoText}>Warframe Assistant</p>
+      </div>
+      <div className={styles.userBlock}>
+        <SignOutButton />
+        <p className={styles.email}>{session?.user?.email}</p>
       </div>
     </header>
   )

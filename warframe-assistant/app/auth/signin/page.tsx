@@ -6,7 +6,11 @@ import { signIn } from "next-auth/react"
 import styles from "./auth.module.css"
 import Link from "next/link"
 
+import toast, { Toaster } from "react-hot-toast"
+import { redirect, useRouter } from "next/navigation"
+
 export default function SignIn() {
+  const router = useRouter()
   const email = useRef("")
   const password = useRef("")
 
@@ -14,9 +18,21 @@ export default function SignIn() {
     const result = await signIn("credentials", {
       email: email.current,
       password: password.current,
-      redirect: true,
+      redirect: false,
       callbackUrl: "/",
     })
+
+    if (result) {
+      if (result?.error) {
+        if (result?.status === 401) {
+          toast.error("Login error. Please check your credentials")
+        } else {
+          toast.error("Login error. Please try again later")
+        }
+      } else {
+        window.location.replace(result.url!)
+      }
+    }
   }
 
   return (
@@ -70,6 +86,7 @@ export default function SignIn() {
           </Link>{" "}
         </p>
       </div>
+      <Toaster />
     </div>
   )
 }

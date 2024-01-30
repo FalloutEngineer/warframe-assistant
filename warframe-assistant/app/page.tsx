@@ -1,4 +1,4 @@
-import RightBody from "./RightBody"
+import RightBody from "./components/RightBody"
 
 import { nextauthOptions } from "@/lib/nextauthoptions"
 import { getServerSession } from "next-auth/next"

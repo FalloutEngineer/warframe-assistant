@@ -1,9 +1,8 @@
 import Image from "next/image"
 
-import logo from "../public/logo.png"
+import logo from "../../public/logo.png"
 
 import styles from "./header.module.css"
-import Link from "next/link"
 import SignOutButton from "./SignOutButton"
 import { getServerSession } from "next-auth"
 import { nextauthOptions } from "@/lib/nextauthoptions"

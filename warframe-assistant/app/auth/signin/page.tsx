@@ -3,7 +3,7 @@ import React, { useRef } from "react"
 
 import { signIn } from "next-auth/react"
 
-import styles from "./auth.module.css"
+import styles from "../auth.module.css"
 import Link from "next/link"
 
 import toast, { Toaster } from "react-hot-toast"
@@ -51,7 +51,7 @@ export default function SignIn() {
             name="email"
             id="emailLogin"
             placeholder="example@mail.com"
-            className={styles.authInput}
+            className="input-outline"
             required
             onChange={(e) => {
               email.current = e.target.value
@@ -67,14 +67,14 @@ export default function SignIn() {
             type="password"
             name="passwordLogin"
             id="passwordLogin"
-            className={styles.authInput}
+            className="input-outline"
             required
             onChange={(e) => {
               password.current = e.target.value
             }}
           />
 
-          <button onClick={onSubmit} className={styles.authSubmit}>
+          <button onClick={onSubmit} className="button-submit">
             Login
           </button>
         </div>

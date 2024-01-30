@@ -1,6 +1,6 @@
 import React from "react"
 
-import styles from "./leftBody.module.css"
+import styles from "../leftBody.module.css"
 
 export default function LeftBodyControls() {
   return (

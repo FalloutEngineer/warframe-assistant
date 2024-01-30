@@ -1,5 +1,5 @@
-import LeftBody from "./LeftBody"
-import RightBody from "./RightBody"
+import LeftBody from "./components/LeftBody"
+import RightBody from "./components/RightBody"
 
 import styles from "./app.module.css"
 

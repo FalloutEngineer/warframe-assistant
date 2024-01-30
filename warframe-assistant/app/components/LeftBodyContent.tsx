@@ -1,8 +1,8 @@
 import React from "react"
 
 import styles from "./leftBodyContent.module.css"
-import LeftBodyGroup from "./leftBody/LeftBodyGroup"
-import ResourcesTodoGroup from "./leftBody/ResourcesTodoGroup"
+import LeftBodyGroup from "../leftBody/LeftBodyGroup"
+import ResourcesTodoGroup from "../leftBody/ResourcesTodoGroup"
 
 export default function LeftBodyContent() {
   return (

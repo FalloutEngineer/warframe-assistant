@@ -1,9 +1,9 @@
 import React from "react"
 
-import styles from "./auth.module.css"
+import styles from "../auth.module.css"
 import Link from "next/link"
 
-export default function RegistrationComponent() {
+export default function SignUp() {
   return (
     <div className={styles.auth}>
       <div className={styles.authWrapper}>
@@ -20,7 +20,7 @@ export default function RegistrationComponent() {
             name="email"
             id="emailReg"
             placeholder="example@mail.com"
-            className={styles.authInput}
+            className="input-outline"
             required
           />
           <label
@@ -33,7 +33,7 @@ export default function RegistrationComponent() {
             type="password"
             name="passwordReg"
             id="passwordReg"
-            className={styles.authInput}
+            className="input-outline"
             required
           />
 
@@ -48,7 +48,7 @@ export default function RegistrationComponent() {
             type="password"
             name="repeatPassword"
             id="repeatPasswordReg"
-            className={styles.authInput}
+            className="input-outline"
             required
           />
 
@@ -67,14 +67,14 @@ export default function RegistrationComponent() {
             </p>
           </label>
 
-          <button type="submit" className={styles.authSubmit}>
+          <button type="submit" className="button-submit">
             Register
           </button>
         </form>
 
         <p className={"regularText " + styles.authRegister}>
           Already have account?{" "}
-          <Link className="regularLink" href="/register">
+          <Link className="regularLink" href="/auth/signin">
             Login
           </Link>{" "}
         </p>

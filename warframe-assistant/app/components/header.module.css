@@ -34,14 +34,6 @@
   align-items: center;
 }
 
-.signOut {
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
-  border-radius: 7px;
-  padding: 7px 10px;
-}
-
 .email {
   position: relative;
 

@@ -12,7 +12,7 @@ export default function SignOutButton() {
       onClick={() => {
         signOut()
       }}
-      className={styles.signOut}
+      className="button-outline"
     >
       Sign Out
     </button>

@@ -8,32 +8,52 @@ export default function RightNav() {
     <nav className={styles.rightNav}>
       <ul className={styles.rightNavList + " rightNavList"}>
         <li className={styles.rightNavItem}>
-          <Link href="/" className={styles.rightNavLink + " " + styles.active}>
+          <Link
+            href="/"
+            className={
+              "button-outline" + " " + styles.rightNavLink + " " + styles.active
+            }
+          >
             Main
           </Link>
         </li>
         <li className={styles.rightNavItem}>
-          <Link href="/alerts" className={styles.rightNavLink}>
+          <Link
+            href="/alerts"
+            className={"button-outline" + " " + styles.rightNavLink}
+          >
             Alerts
           </Link>
         </li>
         <li className={styles.rightNavItem}>
-          <Link href="/fissures" className={styles.rightNavLink}>
+          <Link
+            href="/fissures"
+            className={"button-outline" + " " + styles.rightNavLink}
+          >
             Fissures
           </Link>
         </li>
         <li className={styles.rightNavItem}>
-          <Link href="/lootTables" className={styles.rightNavLink}>
+          <Link
+            href="/lootTables"
+            className={"button-outline" + " " + styles.rightNavLink}
+          >
             Loot Tables
           </Link>
         </li>
         <li className={styles.rightNavItem}>
-          <Link href="/resources" className={styles.rightNavLink}>
+          <Link
+            href="/resources"
+            className={"button-outline" + " " + styles.rightNavLink}
+          >
             Resources
           </Link>
         </li>
         <li className={styles.rightNavItem}>
-          <Link href="/timers" className={styles.rightNavLink}>
+          <Link
+            href="/timers"
+            className={"button-outline" + " " + styles.rightNavLink}
+          >
             Timers
           </Link>
         </li>

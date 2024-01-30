@@ -18,18 +18,11 @@
 }
 .rightNavLink {
   padding: 7px 15px;
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
-  border-bottom-width: 0px;
 
-  border-top-right-radius: 7px;
-  border-top-left-radius: 7px;
-
-  transition: all 0.1s ease;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
-.rightNavLink:hover,
 .active {
   background-color: rgba(255, 255, 255, 0.119);
 }

@@ -1,26 +1,29 @@
 import { User, UserValidationResult } from "@/lib/authTypes"
 import clientPromise from "@/lib/mongodb"
-import bcrypt from "bcrypt"
-import { Collection, MongoClient } from "mongodb"
-
 import { NextResponse } from "next/server"
 
-export default async function trySignUp(user: User) {
+export const POST = async (request: any) => {
   const client = await clientPromise
   const users = client.db(process.env.DB_NAME).collection("users")
 
-  const validationResult = await validateUser(users, user)
+  const { email, password } = await request.json()
 
-  console.log(validationResult)
+  const validationResult = await validateUser(users, {
+    email: email,
+    password: password,
+  })
 
-  //   const password = bcrypt.hashSync(user.password, 10)
-  //   await users.insertOne({
-  //     email: user.email,
-  //     password: password,
-  //     role: "user",
-  //   })
-
-  return NextResponse.json({ success: validationResult.success })
+  try {
+    return NextResponse.json({
+      status: 200,
+      validation: validationResult,
+    })
+  } catch (err: any) {
+    return NextResponse.json({
+      status: 500,
+      validation: validationResult,
+    })
+  }
 }
 
 async function validateUser(users: any, user: User) {

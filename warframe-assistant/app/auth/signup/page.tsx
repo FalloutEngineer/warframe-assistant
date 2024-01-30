@@ -1,14 +1,70 @@
+"use client"
+
 import React from "react"
 
 import styles from "../auth.module.css"
 import Link from "next/link"
-import trySignUp from "@/app/api/signup"
+import trySignUp from "@/app/api/register/_route"
+import toast, { Toaster } from "react-hot-toast"
 
 export default function SignUp() {
-  trySignUp({ email: "dmin@example.com", password: "passwOrd1" })
+  async function onSubmit() {
+    // const response = await trySignUp({
+    //   email: "dmin@example.com",
+    //   password: "passwOrd1",
+    // })
+
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "admin@example.com",
+        password: "passwOrd1",
+      }),
+    })
+
+    const response = await res.json()
+
+    console.log(response)
+
+    if (response) {
+      if (response.validation.success) {
+        toast.success("Successfull registration")
+        // redirect
+      } else {
+        switch (response.validation.message) {
+          case "credentials_error":
+            toast.error("Credentials error")
+            //Highlight wrong field(s)
+            break
+          case "account_exists":
+            toast.error("Account already exists")
+            break
+          default:
+            toast.error("Something went wrong")
+            break
+        }
+      }
+    }
+  }
+
+  // if (result) {
+  //   if (result?.error) {
+  //     if (result?.status === 401) {
+  //       toast.error("Login error. Please check your credentials")
+  //     } else {
+  //       toast.error("Login error. Please try again later")
+  //     }
+  //   } else {
+  //     window.location.replace(result.url!)
+  //   }
+  // }
 
   return (
     <div className={styles.auth}>
+      <Toaster />
       <div className={styles.authWrapper}>
         <h2 className={styles.authText}>Registration</h2>
         <form className={styles.authForm}>
@@ -70,7 +126,13 @@ export default function SignUp() {
             </p>
           </label>
 
-          <button type="submit" className="button-submit">
+          <button
+            type="submit"
+            className="button-submit"
+            onClick={() => {
+              onSubmit()
+            }}
+          >
             Register
           </button>
         </form>

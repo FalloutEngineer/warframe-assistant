@@ -2,8 +2,11 @@ import React from "react"
 
 import styles from "../auth.module.css"
 import Link from "next/link"
+import trySignUp from "@/app/api/signup"
 
 export default function SignUp() {
+  trySignUp({ email: "dmin@example.com", password: "passwOrd1" })
+
   return (
     <div className={styles.auth}>
       <div className={styles.authWrapper}>

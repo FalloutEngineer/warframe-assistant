@@ -4,7 +4,6 @@ import React from "react"
 
 import styles from "../auth.module.css"
 import Link from "next/link"
-import trySignUp from "@/app/api/register/_route"
 import toast, { Toaster } from "react-hot-toast"
 
 export default function SignUp() {

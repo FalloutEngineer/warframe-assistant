@@ -7,10 +7,8 @@ import styles from "../auth.module.css"
 import Link from "next/link"
 
 import toast, { Toaster } from "react-hot-toast"
-import { redirect, useRouter } from "next/navigation"
 
 export default function SignIn() {
-  const router = useRouter()
   const email = useRef("")
   const password = useRef("")
 

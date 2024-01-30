@@ -1,6 +1,6 @@
 "use client"
 
-import React, { use, useRef } from "react"
+import React, { use, useRef, useState } from "react"
 
 import styles from "../auth.module.css"
 import Link from "next/link"
@@ -15,12 +15,16 @@ export default function SignUp() {
 
   const acceptedRules = useRef(false)
 
-  // const user = {
-  //   email: "admin@example.com",
-  //   password: "passwOrd1",
-  // }
+  const [emailHighlight, emailHighlightChange] = useState(false)
+  const [passwordHighlight, passwordHighlightChange] = useState(false)
+  const [passwordRepeatHighlight, passwordRepeatHighlightChange] =
+    useState(false)
 
   async function onSubmit() {
+    emailHighlightChange(false)
+    passwordHighlightChange(false)
+    passwordRepeatHighlightChange(false)
+
     const user = {
       email: email.current,
       password: password.current,
@@ -63,7 +67,14 @@ export default function SignUp() {
             switch (response.validation.message) {
               case "credentials_error":
                 toast.error("Credentials error")
-                //Highlight wrong field(s)
+                if (!response.validation.emailOK) {
+                  emailHighlightChange(true)
+                }
+                if (!response.validation.passwordOK) {
+                  passwordHighlightChange(true)
+                  passwordRepeatHighlightChange(true)
+                }
+
                 break
               case "account_exists":
                 toast.error("Account already exists")
@@ -76,9 +87,11 @@ export default function SignUp() {
         }
       } else {
         toast.error("Passwords are not same")
+        passwordHighlightChange(true)
+        passwordRepeatHighlightChange(true)
       }
     } else {
-      toast.error("Rules are not accepted")
+      toast.error("Rules is not accepted")
     }
   }
 
@@ -143,7 +156,9 @@ export default function SignUp() {
             name="email"
             id="emailReg"
             placeholder="example@mail.com"
-            className="input-outline"
+            className={
+              (emailHighlight ? styles.invalid : "") + " " + "input-outline"
+            }
             required
             onChange={(e) => {
               email.current = e.target.value
@@ -155,11 +170,17 @@ export default function SignUp() {
           >
             Password
           </label>
+          <p className={styles.fieldDescription}>
+            Password must be 8 characters long, have one lowercase letter, one
+            uppercase letter and one number
+          </p>
           <input
             type="password"
             name="passwordReg"
             id="passwordReg"
-            className="input-outline"
+            className={
+              (passwordHighlight ? styles.invalid : "") + " " + "input-outline"
+            }
             required
             onChange={(e) => {
               password.current = e.target.value
@@ -177,7 +198,11 @@ export default function SignUp() {
             type="password"
             name="repeatPassword"
             id="repeatPasswordReg"
-            className="input-outline"
+            className={
+              (passwordRepeatHighlight ? styles.invalid : "") +
+              " " +
+              "input-outline"
+            }
             required
             onChange={(e) => {
               passwordRepeat.current = e.target.value

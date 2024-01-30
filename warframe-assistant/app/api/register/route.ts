@@ -2,6 +2,8 @@ import { User, UserValidationResult } from "@/lib/authTypes"
 import clientPromise from "@/lib/mongodb"
 import { NextResponse } from "next/server"
 
+import bcrypt from "bcrypt"
+
 export const POST = async (request: any) => {
   const client = await clientPromise
   const users = client.db(process.env.DB_NAME).collection("users")
@@ -13,7 +15,21 @@ export const POST = async (request: any) => {
     password: password,
   })
 
+  if (validationResult.success == false) {
+    return NextResponse.json({
+      status: 500,
+      validation: validationResult,
+    })
+  }
+
   try {
+    const encryptedPassword = bcrypt.hashSync(password, 10)
+    await users.insertOne({
+      email: email,
+      password: encryptedPassword,
+      role: "user",
+    })
+
     return NextResponse.json({
       status: 200,
       validation: validationResult,

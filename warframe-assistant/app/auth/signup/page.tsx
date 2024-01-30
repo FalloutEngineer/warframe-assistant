@@ -5,33 +5,45 @@ import React from "react"
 import styles from "../auth.module.css"
 import Link from "next/link"
 import toast, { Toaster } from "react-hot-toast"
+import { signIn } from "next-auth/react"
 
 export default function SignUp() {
-  async function onSubmit() {
-    // const response = await trySignUp({
-    //   email: "dmin@example.com",
-    //   password: "passwOrd1",
-    // })
+  const user = {
+    email: "admin@example.com",
+    password: "passwOrd1",
+  }
 
+  async function onSubmit() {
     const res = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: "admin@example.com",
-        password: "passwOrd1",
-      }),
+      body: JSON.stringify(user),
     })
 
     const response = await res.json()
 
-    console.log(response)
+    console.log(response) //TODO: remove log
 
     if (response) {
       if (response.validation.success) {
         toast.success("Successfull registration")
-        // redirect
+
+        const signInResult = await signIn("credentials", {
+          email: user.email,
+          password: user.password,
+          redirect: false,
+          callbackUrl: "/",
+        })
+
+        if (signInResult) {
+          if (signInResult.error) {
+            toast.error("Login error. Please try again later")
+          } else {
+            window.location.replace(signInResult.url!)
+          }
+        }
       } else {
         switch (response.validation.message) {
           case "credentials_error":
@@ -48,18 +60,6 @@ export default function SignUp() {
       }
     }
   }
-
-  // if (result) {
-  //   if (result?.error) {
-  //     if (result?.status === 401) {
-  //       toast.error("Login error. Please check your credentials")
-  //     } else {
-  //       toast.error("Login error. Please try again later")
-  //     }
-  //   } else {
-  //     window.location.replace(result.url!)
-  //   }
-  // }
 
   return (
     <div className={styles.auth}>

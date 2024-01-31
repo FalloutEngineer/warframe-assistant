@@ -5,6 +5,8 @@ import { NextRequest, NextResponse } from "next/server"
 
 import { decode } from "next-auth/jwt"
 
+const cookie = require("cookie-parse")
+
 //TODO: Protect POST and GET by user session
 
 export const POST = async (request: any) => {
@@ -21,12 +23,9 @@ export const POST = async (request: any) => {
 }
 
 export async function GET(request: any) {
-  // const { owner } = await request.json()
-  // console.log(owner)
+  const cookies = request.headers.get("cookie")
 
-  const link = new URL(request.url)
-
-  let token = request.headers.get("cookie").split("=")[1]
+  const token = cookie.parse(cookies)["next-auth.session-token"]
 
   if (process.env.NEXTAUTH_SECRET) {
     const decoded = await decode({
@@ -34,15 +33,13 @@ export async function GET(request: any) {
       secret: process.env.NEXTAUTH_SECRET,
     })
 
-    console.log(decoded)
+    const owner = decoded?.email
+
+    await connectMongoDB()
+    const groups = await ResourceGroup.find({ owner: owner }).exec()
+
+    return NextResponse.json({ groups })
   } else {
     return NextResponse.json({ code: 500 })
   }
-
-  const owner = "vladvoychenko@gmail.com"
-
-  await connectMongoDB()
-  const groups = await ResourceGroup.find({ owner: owner }).exec()
-
-  return NextResponse.json({ groups })
 }

@@ -1,0 +1,13 @@
+{
+    "owner": "vladvoychenko@gmail.com",
+    "order": 1,
+    "title": "New Group",
+    "items": [
+        {
+            "name": "Rubedo",
+            "currentAmount": 50,
+            "maxAmount": 500,
+            "description": "Can be found on earth"
+        }
+    ]
+}

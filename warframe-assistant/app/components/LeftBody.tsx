@@ -5,7 +5,7 @@ import LeftBodyControls from "./LeftBodyControls"
 
 import styles from "../leftBody.module.css"
 
-export default function LeftBody() {
+export default async function LeftBody() {
   return (
     <div className={styles.leftBody}>
       <Header />

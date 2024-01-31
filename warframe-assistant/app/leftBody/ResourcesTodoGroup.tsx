@@ -30,6 +30,8 @@ export default function ResourcesTodoGroup({
         I button, on click - more info
 
         User can create own resource types and then reuse
+        OR
+        Load resource types from database
 
 
         PRIORITY

@@ -10,16 +10,29 @@ const cookie = require("cookie-parse")
 //TODO: Protect POST and GET by user session
 
 export const POST = async (request: any) => {
-  const { owner, order, title, items } = await request.json()
+  const { order, title, items } = await request.json()
 
-  await connectMongoDB()
+  const token = request.cookies.get("next-auth.session-token").value
 
-  await ResourceGroup.create({ owner, order, title, items })
+  if (process.env.NEXTAUTH_SECRET && token && token !== "") {
+    const decoded = await decode({
+      token: token,
+      secret: process.env.NEXTAUTH_SECRET,
+    })
 
-  return NextResponse.json(
-    { message: "Resource Group created" },
-    { status: 201 }
-  )
+    const owner = decoded?.email
+
+    await connectMongoDB()
+
+    await ResourceGroup.create({ owner, order, title, items })
+
+    return NextResponse.json(
+      { message: "Resource Group created" },
+      { status: 201 }
+    )
+  } else {
+    return NextResponse.json({ code: 500 })
+  }
 }
 
 export async function GET(request: any) {
@@ -27,7 +40,7 @@ export async function GET(request: any) {
 
   const token = cookie.parse(cookies)["next-auth.session-token"]
 
-  if (process.env.NEXTAUTH_SECRET) {
+  if (process.env.NEXTAUTH_SECRET && token && token !== "") {
     const decoded = await decode({
       token: token,
       secret: process.env.NEXTAUTH_SECRET,
